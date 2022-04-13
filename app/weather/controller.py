@@ -14,7 +14,7 @@ def get_weather():
             jsn = request.json
             if 'location' in jsn and 'x' in jsn['location'] and 'y' in jsn['location']:
                 location = jsn['location']
-        res = requests.get('https://api.openweathermap.org/data/2.5/weather?lat='+location['x']+'&lon='+location['y']+'&appid='+os.getenv('WEATHER_API_KEY')).json()
-        res['status'] = True
-        return res
+    res = requests.get('https://api.openweathermap.org/data/2.5/weather?lat='+location['x']+'&lon='+location['y']+'&appid='+os.getenv('WEATHER_API_KEY')).json()
+    res['status'] = True
+    return res
             
