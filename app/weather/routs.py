@@ -1,9 +1,7 @@
-from flask import Blueprint, make_response
+from flask import Blueprint
+
+from app.weather.controller import get_weather
 
 weather = Blueprint('weather', __name__, url_prefix='/weather')
 
-@weather.route('/')
-def index():
-    res = make_response({'status': True, 'message': 'testing weather...'})
-    res.mimetype = 'application/json'
-    return res
+weather.add_url_rule("/", "get-weather", get_weather, methods=['GET'])
