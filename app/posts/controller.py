@@ -59,7 +59,7 @@ def get_posts():
         params = True
         location['x'] = request.args['x']
         location['y'] = request.args['y']
-        page = request.args['page'] if 'page' in request.args else 1
+        page = int(request.args['page']) if 'page' in request.args else 1
     if (params) or (request.data and request.json):
         if not params:
             jsn = request.json
