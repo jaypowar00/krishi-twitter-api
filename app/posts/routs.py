@@ -1,9 +1,8 @@
 from flask import Blueprint, make_response
 
+from app.posts.controller import create_post, get_posts
+
 posts = Blueprint('posts', __name__, url_prefix='/posts')
 
-@posts.route('/')
-def index():
-    res = make_response({'status': True, 'message': 'testing posts...'})
-    res.mimetype = 'application/json'
-    return res
+posts.add_url_rule("/create", "create", create_post, methods=['POST'])
+posts.add_url_rule("/", "getposts", get_posts, methods=['GET'])
