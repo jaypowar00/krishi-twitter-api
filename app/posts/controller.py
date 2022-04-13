@@ -89,25 +89,26 @@ def get_posts():
                 ) t;
                 """)
                 all_posts = cur.fetchall()[0][0]
-                for one_post in all_posts:
-                    mytime = datetime.strptime(one_post['created'], "%Y-%m-%dT%H:%M:%S.%f%z")
-                    mytime += timedelta(hours=5, minutes=30)
-                    mytime = datetime.astimezone(mytime).replace(tzinfo=None)
-                    print('----')
-                    print(date(mytime))
-                    temp = str(date(mytime))
-                    if temp not in ["now", "a minute ago", "an hour ago", "yesterday", "day before", "last week", "last month", 
-                    "in a minute", "in an hour", "tomorrow", "day after", "next week", "next month"]:
-                        one_post['created'] = str(math.floor(int(float(str(date(mytime)).split()[0]))))+" "+" ".join((date(mytime)).split()[1:])
-                    else:
-                        one_post['created'] = temp
+                if all_posts:
+                    for one_post in all_posts:
+                        mytime = datetime.strptime(one_post['created'], "%Y-%m-%dT%H:%M:%S.%f%z")
+                        # mytime += timedelta(hours=5, minutes=30)
+                        mytime = datetime.astimezone(mytime).replace(tzinfo=None)
+                        print('----')
+                        print(date(mytime))
+                        temp = str(date(mytime))
+                        if temp not in ["now", "a minute ago", "an hour ago", "yesterday", "day before", "last week", "last month", 
+                        "in a minute", "in an hour", "tomorrow", "day after", "next week", "next month"]:
+                            one_post['created'] = str(math.floor(int(float(str(date(mytime)).split()[0]))))+" "+" ".join((date(mytime)).split()[1:])
+                        else:
+                            one_post['created'] = temp
                 cur.close()
                 n = Posts.query.count()
                 res = make_response(
                     {
                         'status': True,
                         'total_tweets': n,
-                        'page_tweets': len(all_posts),
+                        'page_tweets': len(all_posts) if all_posts else 0,
                         'tweets': all_posts,
                         'current_page': page,
                         'prev_page': page-1 if page>1 else None,
