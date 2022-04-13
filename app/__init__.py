@@ -14,6 +14,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 CORS(app, expose_headers=['Access-Control-Allow-Origin'], supports_credentials=True)
 
+print('[+] in __init__ file')
 def create_app():
     print('2')
     post_db.init_app(app)
