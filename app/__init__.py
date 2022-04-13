@@ -8,7 +8,6 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-db = SQLAlchemy(app)
 
 app.register_blueprint(posts)
 app.register_blueprint(weather)
@@ -22,10 +21,13 @@ CORS(app, expose_headers=['Access-Control-Allow-Origin'], supports_credentials=T
 print('[+] in __init__ file')
 
 post_db.init_app(app)
-post_db.create_all()
+with app.app_context():
+    post_db.create_all()
+
 def create_app():
     print('2')
     post_db.init_app(app)
-    post_db.create_all()
+    with app.app_context():
+        post_db.create_all()
     print('[+] create app ended!')
     return app
