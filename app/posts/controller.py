@@ -37,16 +37,23 @@ def create_post():
             res.mimetype = 'application/json'
             return res
         except Exception as e:
-            print('error in post cration')
+            print('[+] error in create_post function !!!')
             print(e)
             res = make_response(
                 {
                     'status': False,
-                    'message': 'Something went wrong! ('+e+')'
+                    'message': 'Something went wrong! ('+str(e)+')'
                 }
             )
             res.mimetype = 'application/json'
             return res
+    else:
+        res = make_response(
+            {
+                'status': False,
+                'message': 'fields missing in the request data/json (message, location)'
+            }
+        )
 
 def get_posts():
     """
