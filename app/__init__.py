@@ -11,8 +11,8 @@ app.register_blueprint(weather)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-def init_db():
-    print('2')
-    post_db.init_app(app)
-    post_db.app = app
-    post_db.create_all()
+# def init_db():
+#     print('2')
+post_db.init_app(app)
+post_db.app = app
+post_db.create_all()

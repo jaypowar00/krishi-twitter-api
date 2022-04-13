@@ -8,4 +8,4 @@ class Posts(post_db.Model):
     pid = post_db.Column(post_db.Integer, primary_key=True)
     message = post_db.Column(post_db.Text())
     point = post_db.Column(Geometry(geometry_type='POINT'))
-    created = post_db.Column(post_db.DateTime(timezone=True), server_default=func.utcnow())
+    created = post_db.Column(post_db.DateTime(timezone=True), server_default=func.now())
