@@ -20,4 +20,7 @@ def create_app():
     post_db.init_app(app)
     post_db.app = app
     post_db.create_all()
+    print('[+] create app ended!')
     return app
+
+app = create_app()
