@@ -53,7 +53,7 @@ def get_posts():
     This function retrieves all the posts from our database and sends back as response to the user.
     """
     location = {}
-    page = None
+    page = 1
     params = False
     if 'x' in request.args and 'y' in request.args:
         params = True
